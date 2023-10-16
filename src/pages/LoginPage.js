@@ -8,7 +8,6 @@ import bcrypt from "bcryptjs-react"
 
 import useToast from "../hooks/useToast"
 
-import "./Signup.css"
 import { useAuth } from "../utils/auth"
 import { regex } from "../App"
 

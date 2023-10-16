@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Link } from "react-router-dom"
-import "./Signup.css"
+
 import { regex } from "../App"
 import { encryptPassword } from "../utils/helperFunctions"
 import useToast from "../hooks/useToast"

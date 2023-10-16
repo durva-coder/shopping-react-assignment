@@ -49,10 +49,11 @@ export const ChangePassword = () => {
   const auth = useAuth()
 
   const onSubmit = (submittedData) => {
+    console.log(submittedData)
     // check the old password is same or not
     const result = bcrypt.compareSync(
       submittedData.oldPassword,
-      auth.user.password
+      auth.cookies.user.password
     )
 
     // if old password is same
