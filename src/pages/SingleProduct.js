@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
+import classes from "./SingleProduct.module.css"
 
 const SingleProduct = () => {
   const param = useParams()
@@ -78,15 +79,31 @@ const SingleProduct = () => {
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{productDetail.title}</h5>
-                <p className="card-text">Price: ${productDetail.price}</p>
-                <p className="card-text">Category: {productDetail.category}</p>
                 <p className="card-text">
-                  Description: {productDetail.description}
+                  <span className={classes["product-label"]}>Price: </span>$
+                  {productDetail.price}
                 </p>
-                <p className="card-text">Brand: {productDetail.brand}</p>
-                <p className="card-text">Rating: {productDetail.rating}</p>
                 <p className="card-text">
-                  Discount: {productDetail.discountPercentage}%
+                  <span className={classes["product-label"]}>Category: </span>
+                  {productDetail.category}
+                </p>
+                <p className="card-text">
+                  <span className={classes["product-label"]}>
+                    Description:{" "}
+                  </span>
+                  {productDetail.description}
+                </p>
+                <p className="card-text">
+                  <span className={classes["product-label"]}>Brand:</span>
+                  {productDetail.brand}
+                </p>
+                <p className="card-text">
+                  <span className={classes["product-label"]}>Rating:</span>
+                  {productDetail.rating} / 5
+                </p>
+                <p className="card-text">
+                  <span className={classes["product-label"]}>Discount:</span>
+                  {productDetail.discountPercentage}%
                 </p>
               </div>
             </div>

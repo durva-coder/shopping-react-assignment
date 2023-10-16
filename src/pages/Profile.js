@@ -128,7 +128,7 @@ const Profile = () => {
               </label>
               <input
                 className="form-control"
-                type="number"
+                type="tel"
                 placeholder="Mobile Number"
                 name="mobileNumber"
                 {...register("mobileNumber")}

@@ -132,7 +132,7 @@ export default function SignupPage() {
               </label>
               <input
                 className="form-control"
-                type="text"
+                type="tel"
                 placeholder="Mobile Number"
                 name="mobileNumber"
                 {...register("mobileNumber")}

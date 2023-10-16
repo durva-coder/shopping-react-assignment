@@ -90,7 +90,7 @@ const Products = () => {
                       Description: {product.description}
                     </p>
                     <p className="card-text">Brand Name: {product.brand}</p>
-                    <p className="card-text">Rating: {product.rating}</p>
+                    <p className="card-text">Rating: {product.rating} / 5</p>
                     <p className="card-text">
                       Discount: {product.discountPercentage}%
                     </p>
