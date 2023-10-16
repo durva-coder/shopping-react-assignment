@@ -6,6 +6,7 @@ const Navbar = () => {
   const auth = useAuth()
   const navigate = useNavigate()
 
+  // link active logic
   const navLinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",

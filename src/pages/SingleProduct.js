@@ -8,6 +8,7 @@ const SingleProduct = () => {
   let id = param.id
   const [productDetail, setProductDetails] = useState({})
 
+  // find the single product detail
   const loadData = async () => {
     const result = await axios(`https://dummyjson.com/products/${id}`)
     setProductDetails(result.data)

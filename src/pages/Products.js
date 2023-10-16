@@ -5,12 +5,15 @@ import classes from "./Products.module.css"
 
 const Products = () => {
   const [products, setProducts] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const productsPerPage = 8
   const [isLoading, setIsLoading] = useState(true)
   const [httpError, setHttpError] = useState()
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 8
+
   useEffect(() => {
+    // fetch all products
     const fetchProducts = async () => {
       try {
         const response = await fetch("https://dummyjson.com/products")

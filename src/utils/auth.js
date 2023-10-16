@@ -9,16 +9,19 @@ export const AuthProvider = ({ children }) => {
   const [cookies, setCookies, removeCookie] = useCookies(["user"])
 
   const signup = (user) => {
+    // after signup set cookie
     setUser(user)
     setCookies("user", user)
   }
 
   const login = (user) => {
+    // after login set cookie
     setUser(user)
     setCookies("user", user, { path: "/" })
   }
 
   const logout = () => {
+    // after logout remove cookie
     setUser(null)
     removeCookie("user")
   }

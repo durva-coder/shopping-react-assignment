@@ -16,12 +16,15 @@ const Profile = () => {
   // const loggedInUser = auth.user
 
   const allUsers = JSON.parse(localStorage.getItem("users"))
+
+  // finding the current loggedIn user
   const userDetail = allUsers?.filter((user) => {
     return loggedInUser.email === user.email
   })
   const data = userDetail[0]
   const [userData, setUserData] = useState(data)
 
+  // onchange logic
   const handleFieldChange = (event) => {
     const { name, value } = event.target
     setUserData({
@@ -31,14 +34,19 @@ const Profile = () => {
   }
 
   const onSubmit = (submittedData) => {
+    // finding the index of current loggedIn user
     const userIndex = allUsers.findIndex((user) => user.email === data?.email)
+
+    // check if the updated email is already exists
     const emailExists = allUsers?.filter(
       (user) => user.email === submittedData.email
     )
 
+    // if email exists
     if (emailExists.length > 0 && submittedData.email !== data?.email) {
       showToast("Email already exists.", "danger")
     } else {
+      // else update the user detail at particular index
       if (userIndex !== -1) {
         allUsers[userIndex] = { ...data, ...submittedData }
         localStorage.setItem("users", JSON.stringify(allUsers))
@@ -50,6 +58,7 @@ const Profile = () => {
     }
   }
 
+  // yup validation
   const schema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),

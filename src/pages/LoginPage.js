@@ -18,6 +18,7 @@ export default function LoginPage() {
   const auth = useAuth()
   const { showToast, toastMessage } = useToast()
 
+  //yup validation
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup
@@ -31,11 +32,13 @@ export default function LoginPage() {
   const onSubmit = (submittedData) => {
     const allUsersData = JSON.parse(localStorage.getItem("users"))
 
+    // finding the current login user
     const userData = allUsersData?.filter((user) => {
       return user.email === submittedData.email
     })
 
     if (userData?.length > 0) {
+      // compare the password is same or not
       const result = bcrypt.compareSync(
         submittedData.password,
         userData[0].password

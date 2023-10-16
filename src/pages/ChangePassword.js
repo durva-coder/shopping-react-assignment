@@ -11,8 +11,10 @@ import { regex } from "../App"
 import useToast from "../hooks/useToast"
 
 export const ChangePassword = () => {
+  // show toast message
   const { showToast, toastMessage } = useToast()
 
+  // yup validation
   const schema = yup.object().shape({
     oldPassword: yup
       .string()
@@ -47,11 +49,13 @@ export const ChangePassword = () => {
   const auth = useAuth()
 
   const onSubmit = (submittedData) => {
+    // check the old password is same or not
     const result = bcrypt.compareSync(
       submittedData.oldPassword,
       auth.user.password
     )
 
+    // if old password is same
     if (result) {
       const allUsers = JSON.parse(localStorage.getItem("users"))
       // const userDetail = allUsers.find((user) => user.email === auth.user.email)

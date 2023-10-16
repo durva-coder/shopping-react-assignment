@@ -10,6 +10,7 @@ export default function HomePage() {
     <div>
       {/* {auth.user && <Navbar />}
       {!auth.user && <LoginPage />} */}
+
       {auth.cookies.user && <Navbar />}
       {!auth.cookies.user && <LoginPage />}
     </div>

@@ -18,6 +18,7 @@ export default function SignupPage() {
   let userData = ""
 
   const onSubmit = (submittedData) => {
+    // hashing the password
     const hash = encryptPassword(submittedData.password)
 
     submittedData.password = hash
@@ -33,6 +34,7 @@ export default function SignupPage() {
     if (userData.length > 0) {
       showToast("User Already Exists", "danger")
     } else {
+      // store the user in localstorage
       users.push(submittedData)
       localStorage.setItem("users", JSON.stringify(users))
 
@@ -45,6 +47,7 @@ export default function SignupPage() {
     }
   }
 
+  // yup validation
   const schema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),

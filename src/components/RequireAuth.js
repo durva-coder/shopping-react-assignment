@@ -8,6 +8,7 @@ const RequireAuth = ({ children }) => {
   //   return <Navigate to="/login" />
   // }
 
+  // if user is not login then navigate to home route
   if (!auth.cookies.user) {
     return <Navigate to="/login" />
   }
