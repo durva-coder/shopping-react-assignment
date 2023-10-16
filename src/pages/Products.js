@@ -65,69 +65,71 @@ const Products = () => {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h2 className="mt-4">Products Page:</h2>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-        {currentProducts.map((product) => (
-          <div className="mb-4" key={product.id}>
-            <Link
-              to={`${product.id}`}
-              className="text-decoration-none text-dark"
-            >
-              <div className="card h-100">
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  className={classes["card-img-top"]}
-                />
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title text-primary">{product.title}</h5>
-                  <p className="card-text">Price: ${product.price}</p>
-                  <p className="card-text">Category: {product.category}</p>
-                  <p className="card-text">
-                    Description: {product.description}
-                  </p>
-                  <p className="card-text">Brand Name: {product.brand}</p>
-                  <p className="card-text">Rating: {product.rating}</p>
-                  <p className="card-text">
-                    Discount: {product.discountPercentage}%
-                  </p>
-                  <button className="btn btn-primary mt-auto">
-                    Show Product
-                  </button>
-                </div>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
-
-      {/* Pagination */}
-      <div className="d-flex justify-content-center mt-4">
-        <nav aria-label="Page navigation">
-          <ul className="pagination">
-            {Array.from({
-              length: Math.ceil(products.length / productsPerPage),
-            }).map((_, index) => (
-              <li
-                key={index}
-                className={`page-item ${
-                  currentPage === index + 1 ? "active" : ""
-                }`}
+      <div className={classes["product-container"]}>
+        <h2 className="mt-4 text-center">PRODUCTS</h2>
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+          {currentProducts.map((product) => (
+            <div className="mb-4" key={product.id}>
+              <Link
+                to={`${product.id}`}
+                className="text-decoration-none text-dark"
               >
-                <button
-                  className="page-link"
-                  onClick={() => paginate(index + 1)}
+                <div className="card h-100">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                    className={classes["card-img-top"]}
+                  />
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title text-primary">{product.title}</h5>
+                    <p className="card-text">Price: ${product.price}</p>
+                    <p className="card-text">Category: {product.category}</p>
+                    <p className="card-text">
+                      Description: {product.description}
+                    </p>
+                    <p className="card-text">Brand Name: {product.brand}</p>
+                    <p className="card-text">Rating: {product.rating}</p>
+                    <p className="card-text">
+                      Discount: {product.discountPercentage}%
+                    </p>
+                    <button className="btn btn-primary mt-auto">
+                      Show Product
+                    </button>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="d-flex justify-content-center mt-4">
+          <nav aria-label="Page navigation">
+            <ul className="pagination">
+              {Array.from({
+                length: Math.ceil(products.length / productsPerPage),
+              }).map((_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    currentPage === index + 1 ? "active" : ""
+                  }`}
                 >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                  <button
+                    className="page-link"
+                    onClick={() => paginate(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

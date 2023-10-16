@@ -2,3 +2,7 @@
   height: 15rem;
   object-fit: cover;
 }
+
+.product-container {
+  margin: 20px;
+}
