@@ -6,9 +6,10 @@ import { useAuth } from "../utils/auth"
 import bcrypt from "bcryptjs-react"
 import { encryptPassword } from "../utils/helperFunctions"
 import Navbar from "../components/Navbar"
-import { regex } from "../App"
+import { PWDREGEX } from "../config/regex"
 
 import useToast from "../hooks/useToast"
+import { validationMessages } from "../config/validationMessage"
 
 export const ChangePassword = () => {
   // show toast message
@@ -19,21 +20,12 @@ export const ChangePassword = () => {
     oldPassword: yup
       .string()
       .required()
-      .matches(
-        regex,
-        "Password must contain at least 8 characters, one uppercase, one number, and one special character"
-      ),
+      .matches(PWDREGEX, validationMessages.pwdValidation),
     newPassword: yup
       .string()
       .required()
-      .matches(
-        regex,
-        "Password must contain at least 8 characters, one uppercase, one number, and one special character"
-      )
-      .notOneOf(
-        [yup.ref("oldPassword")],
-        "Password should not be the same as the old password"
-      ),
+      .matches(PWDREGEX, validationMessages.pwdValidation)
+      .notOneOf([yup.ref("oldPassword")], validationMessages.oldPwdMatch),
     confirmNewPassword: yup
       .string()
       .oneOf([yup.ref("newPassword")], "New passwords don't match")

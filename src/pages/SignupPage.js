@@ -3,12 +3,13 @@ import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Link } from "react-router-dom"
-
-import { regex } from "../App"
 import { encryptPassword } from "../utils/helperFunctions"
 import useToast from "../hooks/useToast"
 import { useAuth } from "../utils/auth"
 import { useNavigate } from "react-router-dom"
+import { PWDREGEX } from "../config/regex"
+import { validationMessages } from "../config/validationMessage"
+import { messages } from "../config/messages"
 
 export default function SignupPage() {
   const auth = useAuth()
@@ -32,7 +33,7 @@ export default function SignupPage() {
     })
 
     if (userData.length > 0) {
-      showToast("User Already Exists", "danger")
+      showToast(messages.userExists, "danger")
     } else {
       // store the user in localstorage
       users.push(submittedData)
@@ -40,7 +41,7 @@ export default function SignupPage() {
 
       auth.signup(submittedData)
 
-      showToast("Signup Successful", "success")
+      showToast(messages.signupSuccess, "success")
       setTimeout(() => {
         navigate("/products", { replace: true })
       }, 1000)
@@ -49,22 +50,18 @@ export default function SignupPage() {
 
   // yup validation
   const schema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
+    firstName: yup.string().required().max(10).min(3),
+    lastName: yup.string().required().max(10).min(3),
     mobileNumber: yup.string().min(10).max(10).required(),
     email: yup.string().email().required(),
-    password: yup
-      .string()
-      .required()
-      .max(32)
-      .min(8)
-      .matches(
-        regex,
-        "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-      ),
+    password: yup.string().required().max(32).min(8).matches(
+      PWDREGEX,
+
+      validationMessages.pwdValidation
+    ),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .oneOf([yup.ref("password"), null], validationMessages.pwdNotMatch)
       .required(),
   })
 
@@ -132,7 +129,7 @@ export default function SignupPage() {
               </label>
               <input
                 className="form-control"
-                type="tel"
+                type="number"
                 placeholder="Mobile Number"
                 name="mobileNumber"
                 {...register("mobileNumber")}

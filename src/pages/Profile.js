@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useState } from "react"
 import Navbar from "../components/Navbar"
 import useToast from "../hooks/useToast"
+import { messages } from "../config/messages"
 
 const Profile = () => {
   const auth = useAuth()
@@ -44,16 +45,16 @@ const Profile = () => {
 
     // if email exists
     if (emailExists.length > 0 && submittedData.email !== data?.email) {
-      showToast("Email already exists.", "danger")
+      showToast(messages.emailExists, "danger")
     } else {
       // else update the user detail at particular index
       if (userIndex !== -1) {
         allUsers[userIndex] = { ...data, ...submittedData }
         localStorage.setItem("users", JSON.stringify(allUsers))
 
-        showToast("Profile updated successfully", "success")
+        showToast(messages.profileUpdate, "success")
       } else {
-        showToast("User not found", "danger")
+        showToast(messages.userNotFound, "danger")
       }
     }
   }
@@ -128,7 +129,7 @@ const Profile = () => {
               </label>
               <input
                 className="form-control"
-                type="tel"
+                type="number"
                 placeholder="Mobile Number"
                 name="mobileNumber"
                 {...register("mobileNumber")}

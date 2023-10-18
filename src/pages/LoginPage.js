@@ -5,11 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import bcrypt from "bcryptjs-react"
-
 import useToast from "../hooks/useToast"
-
 import { useAuth } from "../utils/auth"
-import { regex } from "../App"
+import { PWDREGEX } from "../config/regex"
+import { validationMessages } from "../config/validationMessage"
+import { messages } from "../config/messages"
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -25,7 +25,7 @@ export default function LoginPage() {
       .required()
       .max(32)
       .min(8)
-      .matches(regex, "Incorrect Password"),
+      .matches(PWDREGEX, validationMessages.pwdIncoorect),
   })
 
   const onSubmit = (submittedData) => {
@@ -49,10 +49,10 @@ export default function LoginPage() {
 
         navigate("/products", { replace: true })
       } else {
-        showToast("Password does not match.", "danger")
+        showToast(messages.pwdNotMatch, "danger")
       }
     } else {
-      showToast("User doesn't exist.", "danger")
+      showToast(messages.userNotExists, "danger")
     }
     return
   }
